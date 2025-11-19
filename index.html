@@ -3,213 +3,353 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Test Bymm</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Whatitu Website</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
     <style>
-        /* Mengatur font agar lebih modern dan nyaman dibaca */
+        /* --- RESET & DASAR --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #FFFDE7; /* Latar belakang kuning pastel muda */
-            display: flex; /* Menggunakan flexbox untuk memusatkan konten utama */
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 1rem; /* Padding responsif */
-        }
-        /* Class untuk menampung konten cerita, hanya menangani padding bawah untuk footer navigasi */
-        .story-content-area {
-            padding-bottom: 6rem; 
-        }
-        /* Style untuk tombol bab aktif */
-        .tab-active {
-            border-bottom: 3px solid #FBC02D;
-            color: #FBC02D;
-            font-weight: 600;
-        }
-
-        /* Scrollbar styling */
-        .overflow-y-auto::-webkit-scrollbar { width: 8px; }
-        .overflow-y-auto::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
-        .overflow-y-auto::-webkit-scrollbar-thumb { background: #FBC02D; border-radius: 10px; }
-        .overflow-y-auto::-webkit-scrollbar-thumb:hover { background: #F9A825; }
-
-        /* --- PERUBAHAN DI SINI --- */
-        /* Memaksa modal untuk rasio 9:16 */
-        #modalContainer {
-            aspect-ratio: 9 / 16;
-            height: 95vh; /* Paksa tinggi jadi 95% viewport */
-            width: auto; /* Biarkan lebar dihitung otomatis oleh aspect-ratio */
-            
-            /* Pastikan tidak melebihi layar */
-            max-width: 100vw; 
-            max-height: 95vh;
-
-            /* Memastikan flex-col tetap bekerja */
+            /* Warna Background Cream Lembut */
+            background-color: #FFF8E7; 
+            font-family: 'Poppins', sans-serif;
+            color: #4A4A4A;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden; /* Mencegah scroll samping */
         }
-        /* --- AKHIR PERUBAHAN --- */
+
+        /* --- HEADER MODERN --- */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Dekorasi bulatan blur di belakang judul agar estetik */
+        header::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            background: #FFC2D1;
+            filter: blur(60px);
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        h1.brand-logo {
+            font-family: 'Outfit', sans-serif; /* Font Modern Geometris */
+            font-weight: 900; /* Sangat Tebal */
+            font-size: 3.5rem; /* Ukuran Besar */
+            letter-spacing: -2px; /* Jarak antar huruf dirapatkan biar solid */
+            
+            /* Membuat Teks Bergradasi */
+            background: linear-gradient(135deg, #FF5F8B 0%, #B19CD9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            
+            /* Shadow halus */
+            drop-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            
+            margin-bottom: 5px;
+            line-height: 1;
+        }
+
+        /* Aksen titik kecil di akhir judul */
+        h1.brand-logo::after {
+            content: '.';
+            color: #4A4A4A; /* Warna titik beda sendiri */
+            -webkit-text-fill-color: #4A4A4A;
+        }
+
+        p.subtitle {
+            font-size: 0.9rem;
+            color: #888;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase; /* Huruf kapital semua biar rapi */
+            margin-top: 10px;
+        }
+
+        /* --- CONTAINER MENU --- */
+        #menu-container {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding-bottom: 50px;
+        }
+
+        /* --- TOMBOL MENU (CARD) --- */
+        .menu-card {
+            background: #FFFFFF; /* Lebih bersih sedikit untuk kontras modern */
+            padding: 22px;
+            border-radius: 18px;
+            /* Shadow lebih halus dan lebar (modern shadow) */
+            box-shadow: 0 10px 20px rgba(200, 180, 180, 0.15); 
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            animation: munculSatuSatu 0.6s ease forwards;
+            opacity: 0;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(200, 180, 180, 0.25);
+        }
+
+        .menu-card:active {
+            transform: scale(0.97);
+        }
+
+        /* Animasi delay */
+        .menu-card:nth-child(1) { animation-delay: 0.1s; border-left: 5px solid #FF5F8B; }
+        .menu-card:nth-child(2) { animation-delay: 0.2s; border-left: 5px solid #B19CD9; }
+        .menu-card:nth-child(3) { animation-delay: 0.3s; border-left: 5px solid #80ED99; }
+        .menu-card:nth-child(4) { animation-delay: 0.4s; border-left: 5px solid #FFB703; }
+
+        .menu-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .menu-icon {
+            font-size: 1.4rem;
+            background: #F3F3F3;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        /* --- POP UP (MODAL) --- */
+        #modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(30, 30, 30, 0.4); /* Lebih gelap dikit biar fokus */
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(8px); /* Blur makin kuat ala iOS */
+        }
+
+        #modal-content {
+            background: #FFFBEB; 
+            width: 100%;
+            max-width: 360px;
+            border-radius: 30px; /* Lebih bulat */
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: popUpNaik 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        #modal-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 20px;
+            background-color: #eee;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        #modal-title {
+            font-family: 'Outfit', sans-serif;
+            color: #222;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        #modal-desc {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        /* Tombol Aksi Gradient */
+        .btn-action {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            /* Gradient Modern */
+            background: linear-gradient(90deg, #FF5F8B 0%, #FF8FAB 100%);
+            color: white;
+            text-decoration: none;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(255, 95, 139, 0.3);
+            transition: 0.3s;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .btn-action:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 95, 139, 0.4);
+        }
+
+        .btn-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: #fff;
+            width: 35px; height: 35px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.5rem;
+            color: #444;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .btn-close:active { transform: scale(0.9); }
+
+        /* --- ANIMASI --- */
+        @keyframes munculSatuSatu {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes popUpNaik {
+            from { transform: scale(0.8) translateY(20px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="text-center p-8 bg-white shadow-2xl rounded-3xl max-w-lg w-full transform transition-transform duration-500 hover:scale-[1.03] border-t-8 border-yellow-400">
-        <h1 class="text-6xl font-extrabold text-gray-900 mb-4 tracking-tight leading-tight">Judul Buku</h1>
-        <p class="text-xl text-gray-700 mb-8 italic">Buku ni di ciptakan oleh ... yang menceritakan tentang ...</p>
-        <button id="openModalBtn" class="px-10 py-4 text-lg font-bold text-white bg-yellow-500 rounded-full shadow-xl hover:bg-yellow-600 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-yellow-300 focus:ring-opacity-70">
-            Mulai Petualangan Sekarang!
-        </button>
-    </div>
+    <header>
+        <h1 class="brand-logo">whatitu</h1>
+        <p class="subtitle">Explore The Good Stuff</p>
+    </header>
 
-    <div id="readingModal" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden items-center justify-center p-4">
-        
-        <div class="bg-white rounded-2xl shadow-2xl relative transition-all duration-300 transform scale-95 opacity-0" id="modalContainer">
+    <div id="menu-container"></div>
+
+    <div id="modal-overlay" onclick="tutupPopup(event)">
+        <div id="modal-content">
+            <button class="btn-close" onclick="tutupPopup(null)">&times;</button>
             
-            <button id="closeModalBtn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-900 transition duration-150 p-2 rounded-full hover:bg-gray-100 z-50">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-
-            <div id="chapterTabs" class="flex justify-start border-b border-gray-200 sticky top-0 bg-white z-10 p-4 rounded-t-xl overflow-x-auto">
-                </div>
-
-            <div class="p-6 flex-grow overflow-y-auto min-h-0">
-                <h2 id="chapterTitle" class="text-4xl font-extrabold text-gray-900 mb-6 leading-snug"></h2>
-                <div id="chapterContent" class="story-content-area text-gray-800 text-lg leading-relaxed space-y-5">
-                    </div>
-            </div>
-
-            <div class="absolute bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 flex justify-between items-center rounded-b-xl shadow-lg z-20">
-                <button id="prevChapterBtn" class="flex items-center px-5 py-2.5 bg-yellow-100 text-yellow-700 font-semibold rounded-full hover:bg-yellow-200 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed group">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                    Sebelumnya
-                </button>
-                <span id="chapterStatus" class="text-base font-medium text-gray-600"></span>
-                <button id="nextChapterBtn" class="flex items-center px-5 py-2.5 bg-yellow-500 text-white font-semibold rounded-full hover:bg-yellow-600 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed group">
-                    Selanjutnya
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </button>
-            </div>
+            <img id="modal-img" src="" alt="Preview">
+            
+            <h2 id="modal-title">Judul</h2>
+            <p id="modal-desc">Deskripsi</p>
+            
+            <a id="modal-btn" href="#" class="btn-action" target="_blank">Pesan Sekarang</a>
         </div>
     </div>
 
     <script>
-        // Data cerita per bab.
-        const chapters = [
-            { title: "Bagian 1: Judulnya", content: "Isi Cerita" },
-            { title: "Bagian 2: Judul", content: "Isi Cerita" },
-            { title: "Bagian 3: Judul", content: "Isi Cerita" },
-            { title: "Bagian 4: Judul", content: "Isi Cerita" },
-            { title: "Bagian 5: Judul", content: "Isi Cerita" },
-            { title: "Bagian 6: Judul", content: "Isi Cerita" },
-            { title: "Bagian 7: Judul", content: "Isi Cerita" },
-            { title: "Bagian 8: Judul", content: "Isi Cerita" }
+        /* === DATABASE MENU === */
+        const dataMenu = [
+            {
+                id: 1,
+                judul: "Bakso Lava",
+                icon: "🔥", 
+                deskripsi: "Pedasnya meledak di mulut! Bakso jumbo isi cabai rawit pilihan dengan kuah kaldu gurih.",
+                gambar: "https://source.unsplash.com/400x300/?spicy-food", 
+                linkEmbed: "https://wa.me/6281234567890?text=Pesan%20Bakso" 
+            },
+            {
+                id: 2,
+                judul: "Villa Bromo",
+                icon: "🏡",
+                deskripsi: "Staycation estetik dengan pemandangan gunung. Fasilitas lengkap, wifi kencang, dan air hangat.",
+                gambar: "https://source.unsplash.com/400x300/?cottage",
+                linkEmbed: "https://goo.gl/maps/linkmaps"
+            },
+            {
+                id: 3,
+                judul: "Jeep Adventure",
+                icon: "🚙",
+                deskripsi: "Jelajahi lautan pasir Bromo dengan Jeep Hardtop klasik. Pengalaman offroad yang tak terlupakan.",
+                gambar: "https://source.unsplash.com/400x300/?jeep",
+                linkEmbed: "https://wa.me/6281234567890?text=Sewa%20Jeep"
+            },
+            {
+                id: 4,
+                judul: "Merch Whatitu",
+                icon: "✨",
+                deskripsi: "Tampil beda dengan koleksi kaos dan hoodie limited edition dari Whatitu. Bahan premium!",
+                gambar: "https://source.unsplash.com/400x300/?fashion",
+                linkEmbed: "https://shopee.co.id"
+            }
         ];
 
-        let currentChapterIndex = 0;
+        /* === LOGIKA RENDER & POPUP === */
+        const container = document.getElementById('menu-container');
 
-        // Mendapatkan elemen-elemen DOM
-        const openModalBtn = document.getElementById('openModalBtn');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        const readingModal = document.getElementById('readingModal');
-        const modalContainer = document.getElementById('modalContainer');
-        const chapterTabsContainer = document.getElementById('chapterTabs');
-        const chapterTitleElement = document.getElementById('chapterTitle');
-        const chapterContentElement = document.getElementById('chapterContent');
-        const prevChapterBtn = document.getElementById('prevChapterBtn');
-        const nextChapterBtn = document.getElementById('nextChapterBtn');
-        const chapterStatusElement = document.getElementById('chapterStatus');
+        dataMenu.forEach(item => {
+            const box = document.createElement('div');
+            box.className = 'menu-card';
+            box.onclick = () => bukaPopup(item);
 
-        // Fungsi untuk menampilkan modal
-        function openModal() {
-            readingModal.classList.remove('hidden');
-            readingModal.classList.add('flex');
-            setTimeout(() => {
-                modalContainer.classList.remove('opacity-0', 'scale-95');
-                modalContainer.classList.add('opacity-100', 'scale-100');
-            }, 10);
-            renderChapter(currentChapterIndex);
-        }
-
-        // Fungsi untuk menyembunyikan modal
-        function closeModal() {
-            modalContainer.classList.remove('opacity-100', 'scale-100');
-            modalContainer.classList.add('opacity-0', 'scale-95');
-            setTimeout(() => {
-                readingModal.classList.remove('flex');
-                readingModal.classList.add('hidden');
-            }, 300);
-        }
-
-        // Fungsi untuk merender daftar bab sebagai tab
-        function renderTabs() {
-            chapterTabsContainer.innerHTML = '';
-            chapters.forEach((chapter, index) => {
-                const tabButton = document.createElement('button');
-                tabButton.textContent = chapter.title;
-                tabButton.className = 'py-3 px-5 text-center text-gray-600 hover:text-gray-900 transition-colors duration-150 focus:outline-none whitespace-nowrap';
-                tabButton.dataset.index = index;
-
-                if (index === currentChapterIndex) {
-                    tabButton.classList.add('tab-active');
-                }
-
-                tabButton.addEventListener('click', () => {
-                    currentChapterIndex = index;
-                    renderChapter(currentChapterIndex);
-                });
-
-                chapterTabsContainer.appendChild(tabButton);
-            });
-        }
-
-        // Fungsi untuk merender konten bab
-        function renderChapter(index) {
-            const chapter = chapters[index];
-            chapterTitleElement.textContent = chapter.title;
-            chapterContentElement.innerHTML = `<p>${chapter.content}</p>`;
-            
-            updateNavigationStatus();
-            renderTabs();
-
-            chapterContentElement.parentElement.scrollTop = 0;
-        }
-
-        // Fungsi untuk memperbarui status navigasi
-        function updateNavigationStatus() {
-            prevChapterBtn.disabled = currentChapterIndex === 0;
-            nextChapterBtn.disabled = currentChapterIndex === chapters.length - 1;
-            chapterStatusElement.textContent = `Bab ${currentChapterIndex + 1} dari ${chapters.length}`;
-        }
-
-        // Event Listeners
-        openModalBtn.addEventListener('click', openModal);
-        closeModalBtn.addEventListener('click', closeModal);
-
-        // Navigasi
-        prevChapterBtn.addEventListener('click', () => {
-            if (currentChapterIndex > 0) {
-                currentChapterIndex--;
-                renderChapter(currentChapterIndex);
-            }
+            box.innerHTML = `
+                <span class="menu-title">${item.judul}</span>
+                <span class="menu-icon">${item.icon}</span>
+            `;
+            container.appendChild(box);
         });
 
-        nextChapterBtn.addEventListener('click', () => {
-            if (currentChapterIndex < chapters.length - 1) {
-                currentChapterIndex++;
-                renderChapter(currentChapterIndex);
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modalImg = document.getElementById('modal-img');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+        const modalBtn = document.getElementById('modal-btn');
+
+        function bukaPopup(data) {
+            modalTitle.innerText = data.judul;
+            modalDesc.innerText = data.deskripsi;
+            modalImg.src = data.gambar;
+            modalBtn.href = data.linkEmbed;
+            modalOverlay.style.display = 'flex';
+        }
+
+        function tutupPopup(event) {
+            if (event === null || event.target === modalOverlay) {
+                modalOverlay.style.display = 'none';
             }
-        });
-
-        // Inisialisasi
-        renderTabs(); 
-
+        }
     </script>
 </body>
 </html>

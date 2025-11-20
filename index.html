@@ -286,9 +286,9 @@
                 id: 1,
                 judul: "Pecel Bu Leo",
                 icon: "🫘", 
-                deskripsi: "Ini Definisi Bumbu Pecel yang Sebenarnya! 🥜🌶️//Bukan sambel pecel biasa yang encer dan hambar. Sambal Pecel [Nama Brand] menghadirkan tekstur yang medok dan rasa yang nendang!  Bayangkan perpaduan: 🥜 Kacang tanah yang ditumbuk kasar (masih ada tekstur crunchy-nya). 🍃 Aroma daun jeruk yang semerbak wangi. 🌶️ Pedas, Manis, dan Gurih Gula Merah yang pas di lidah. // Dicocol gorengan enak, disiram ke sayur rebusan makin mantap! Sekali coba, dijamin langsung jatuh cinta sama rasanya. ",
-                gambar: "https://source.unsplash.com/400x300/?spicy-food", 
-                linkEmbed: "https://wa.me/6281234567890?text=Pesan%20Bakso" 
+                deskripsi: "Ini Definisi Bumbu Pecel yang Sebenarnya! 🥜🌶 <br>  <br> Bukan sambel pecel biasa yang encer dan hambar. Sambal Pecel [Nama Brand] menghadirkan tekstur yang medok dan rasa yang nendang!",
+                gambar: "comingsoon.png", 
+                linkEmbed: "https://wa.me/" 
             },
             {
                 id: 2,
@@ -339,7 +339,7 @@
 
         function bukaPopup(data) {
             modalTitle.innerText = data.judul;
-            modalDesc.innerText = data.deskripsi;
+            modalDesc.innerHTML = data.deskripsi; 
             modalImg.src = data.gambar;
             modalBtn.href = data.linkEmbed;
             modalOverlay.style.display = 'flex';
